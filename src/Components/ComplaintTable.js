@@ -39,8 +39,6 @@ const ComplaintTable = () => {
   const filteredComplaints = complaints.filter(complaint => {
     const statusMatch = filterStatus ? complaint.status === filterStatus : true;
     const priorityMatch = filterPriority ? complaint.priority === filterPriority : true;
-    console.log(`Checking complaint: ${complaint.title}, statusMatch: ${statusMatch}, priorityMatch: ${priorityMatch}`); 
-
     return statusMatch && priorityMatch;
   });
 
@@ -102,8 +100,5 @@ const ComplaintTable = () => {
     </div>
   );
 };
-
-console.log('filterStatus:', filterStatus); // Add this
-console.log('filterPriority:', filterPriority); // Add this
 
 export default ComplaintTable;
