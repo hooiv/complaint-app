@@ -63,7 +63,7 @@ const ComplaintTable = () => {
         <table className="min-w-full bg-white shadow-md rounded-md">
           <thead className="text-black">
             <tr>
-              <th className="py-2 px-4 border-b">Title</th>
+              <th className="py px-4 border-b">Title</th>
               <th className="py-2 px-4 border-b">Category</th>
               <th className="py-2 px-4 border-b">Priority</th>
               <th className="py-2 px-4 border-b">Date Submitted</th>
