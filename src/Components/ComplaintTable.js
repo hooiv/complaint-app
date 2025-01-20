@@ -74,7 +74,7 @@ const ComplaintTable = () => {
           <tbody>
             {filteredComplaints.map((complaint) => (
               <tr key={complaint._id}>
-                <td className="py-2 px-4 border-b">{complaint.title}</td>
+                <td className="py-2 px-4 border-b text-black">{complaint.title}</td>
                 <td className="py-2 px-4 border-b">{complaint.category}</td>
                 <td className="py-2 px-4 border-b">{complaint.priority}</td>
                 <td className="py-2 px-4 border-b">{new Date(complaint.dateSubmitted).toLocaleDateString()}</td>
