@@ -61,7 +61,7 @@ const ComplaintTable = () => {
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white shadow-md rounded-md">
-          <thead className="bg-gray-100">
+          <thead className="text-black">
             <tr>
               <th className="py-2 px-4 border-b">Title</th>
               <th className="py-2 px-4 border-b">Category</th>
