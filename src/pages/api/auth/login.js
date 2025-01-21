@@ -1,7 +1,7 @@
 import dbConnect from '../../../lib/dbConnect';
 import User from '../../../models/User';
 import jwt from 'jsonwebtoken';
-import { withIronSessionApiRoute } from 'iron-session';
+import { withIronSessionApiRoute } from 'iron-session/next';
 
 const loginRoute = async (req, res) => {
   if (req.method !== 'POST') {
