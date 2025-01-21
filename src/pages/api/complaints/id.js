@@ -1,6 +1,8 @@
 import dbConnect from '@/lib/dbConnect';
 import Complaint from '@/models/Complaint';
 import { sendStatusUpdateEmail } from '@/lib/emailService';
+import authMiddleware from '../../../lib/authMiddleware';
+
 
 export default async function handler(req, res) {
   const { id } = req.query;
