@@ -1,10 +1,14 @@
-// pages/login.js
-import ComplaintForm from '../components/ComplaintForm';
-import Link from 'next/link';
+// pages/submit-complaint.js
+import React from 'react';
+import ComplaintForm from '../components/ComplaintForm'; // Import ComplaintForm
 
-const ComplaintPage = () => (
-  <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      </div>
-);
+const SubmitComplaintPage = () => {
+  return (
+    <div>
+      <h1>Submit a Complaint</h1>
+      <ComplaintForm /> {/* Render the ComplaintForm component */}
+    </div>
+  );
+};
 
-export default ComplaintPage;
+export default SubmitComplaintPage;
