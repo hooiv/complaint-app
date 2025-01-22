@@ -6,6 +6,7 @@ import { getIronSession } from 'iron-session'; // Correct import!
 
 const sessionOptions = {
   password: process.env.SECRET_COOKIE_PASSWORD,
+  cookieName: 'complaint_app_session',  // <-- ADDED cookieName!
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
