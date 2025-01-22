@@ -1,15 +1,7 @@
-// pages/api/auth/login.js
 import dbConnect from '../../../lib/dbConnect';
 import User from '../../../models/User';
 import jwt from 'jsonwebtoken';
-import { getIronSession } from 'iron-session'; // Correct import!
-
-const sessionOptions = {
-  password: process.env.SECRET_COOKIE_PASSWORD,
-  cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
-  },
-};
+import { withIronSessionApiRoute } from 'iron-session';
 
 const loginRoute = async (req, res) => {
   if (req.method !== 'POST') {
@@ -21,7 +13,7 @@ const loginRoute = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email }).select('+password'); // Explicitly select password
 
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
@@ -35,12 +27,11 @@ const loginRoute = async (req, res) => {
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '1h', // Adjust as needed
     });
 
-    const session = await getIronSession(req, res, sessionOptions); // Initialize session
-    session.token = token;
-    await session.save(); // Manually save!
+    req.session.token = token;
+    await req.session.save();
 
     res.status(200).json({ message: 'Logged in successfully', token });
   } catch (error) {
@@ -49,4 +40,11 @@ const loginRoute = async (req, res) => {
   }
 };
 
-export default loginRoute; // Export directly!
+const sessionOptions = {
+  password: process.env.SECRET_COOKIE_PASSWORD, // Ensure you have this in .env.local or Vercel
+  cookieOptions: {
+    secure: process.env.NODE_ENV === 'production', // Set secure in production
+  },
+};
+
+export default withIronSessionApiRoute(loginRoute, sessionOptions);
