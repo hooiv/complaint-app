@@ -78,18 +78,18 @@ JWT_SECRET and SECRET_COOKIE_PASSWORD: Generate strong, random strings of at lea
 
 ### Running Locally
 To run the application locally in development mode:
-npm run dev
-# or
-yarn dev
+ npm run dev
+ # or
+ yarn dev
 This will start the Next.js development server. Open your browser and navigate to http://localhost:3000 to access the application.
 
 To build and start the application in production mode (after building):
 
-npm run build
-npm run start
-# or
-yarn build
-yarn start
+ npm run build
+ npm run start
+ # or
+ yarn build
+ yarn start
 ## Using the Application
 ### Registration
 Navigate to the registration page: http://localhost:3000/register.
