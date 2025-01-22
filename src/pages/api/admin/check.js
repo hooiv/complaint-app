@@ -1,4 +1,4 @@
-// pages/api/admin/check.js (Log req and res in check.js)
+// pages/api/admin/check.js (Corrected - Await authMiddleware)
 import authMiddleware from '../../../lib/authMiddleware';
 
 const checkAdmin = async (req, res) => {
@@ -8,10 +8,12 @@ const checkAdmin = async (req, res) => {
   return res.status(403).json({ isAdmin: false });
 };
 
-const handler = async (req, res) => { // Wrap with an async function to log
-  console.log("check.js: Received req object:", req); // Log req in check.js
-  console.log("check.js: Received res object:", res); // Log res in check.js
-  return authMiddleware(req, res, checkAdmin); // Call authMiddleware
+const handler = async (req, res) => { // Async wrapper for await
+  console.log("check.js: Received req object:", req);
+  console.log("check.js: Received res object:", res);
+  await authMiddleware(req, res, async () => { // AWAIT authMiddleware! and wrap checkAdmin in another async func
+    return checkAdmin(req, res)
+  });
 };
 
 export default handler;
