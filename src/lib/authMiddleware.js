@@ -5,10 +5,12 @@ import User from '../models/User';
 
 const authMiddleware = async (req, res, next) => {
   try { // Add try-catch block around the entire middleware logic
-    if (!req) {
-      console.error("authMiddleware: Request object is undefined!"); // Log if req is undefined
-      return res.status(500).json({ message: 'Request object not found in middleware.' });
-    }
+    
+  if (!req || !req.headers) { // ADD THIS CHECK
+    console.error("authMiddleware: req or req.headers is UNDEFINED!");
+    return res.status(500).json({ message: 'Server error: Request headers missing.' });
+  }
+
 
     const authHeader = req.headers?.authorization;
     console.log("authMiddleware: authHeader:", authHeader); // Log authHeader
