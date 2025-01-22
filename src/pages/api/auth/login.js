@@ -2,11 +2,11 @@
 import dbConnect from '../../../lib/dbConnect';
 import User from '../../../models/User';
 import jwt from 'jsonwebtoken';
-import { getIronSession } from 'iron-session'; // Correct import!
+import { getIronSession } from 'iron-session';
 
 const sessionOptions = {
   password: process.env.SECRET_COOKIE_PASSWORD,
-  cookieName: 'complaint_app_session',  // <-- ADDED cookieName!
+  cookieName: 'complaint_app_session',
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
@@ -39,15 +39,20 @@ const loginRoute = async (req, res) => {
       expiresIn: '1h',
     });
 
-    const session = await getIronSession(req, res, sessionOptions); // Initialize session
+    const session = await getIronSession(req, res, sessionOptions);
     session.token = token;
-    await session.save(); // Manually save!
+    await session.save();
 
-    res.status(200).json({ message: 'Logged in successfully', token });
+    // Include isAdmin in the JSON response
+    res.status(200).json({
+      message: 'Logged in successfully',
+      token,
+      isAdmin: user.isAdmin, // Add isAdmin here
+    });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Login failed', error: error.message });
   }
 };
 
-export default loginRoute; // Export directly!
+export default loginRoute;
