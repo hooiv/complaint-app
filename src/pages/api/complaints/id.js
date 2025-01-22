@@ -1,3 +1,4 @@
+// pages/api/complaints/[id].js
 import dbConnect from '../../../lib/dbConnect';
 import Complaint from '../../../models/Complaint';
 import { sendStatusUpdateEmail } from '../../../lib/emailService';
@@ -21,15 +22,20 @@ export default async function handler(req, res) {
       break;
 
     case 'PUT':
-      await authMiddleware(req, res, async () => { // Protect PUT route
+      await authMiddleware(req, res, async () => {
         if (!req.user || !req.user.isAdmin) {
           return res.status(401).json({ message: 'Unauthorized' });
         }
         try {
-          const complaint = await Complaint.findByIdAndUpdate(id, req.body, {
-            new: true,
-            runValidators: true,
-          });
+          // Ensure `updatedAt` is included in the update
+          const complaint = await Complaint.findByIdAndUpdate(
+            id,
+            { ...req.body, updatedAt: new Date() }, // Add update date
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
           if (!complaint) {
             return res.status(404).json({ success: false });
           }
@@ -42,7 +48,7 @@ export default async function handler(req, res) {
       break;
 
     case 'DELETE':
-      await authMiddleware(req, res, async () => { // Protect DELETE route
+      await authMiddleware(req, res, async () => {
         if (!req.user || !req.user.isAdmin) {
           return res.status(401).json({ message: 'Unauthorized' });
         }
