@@ -5,7 +5,7 @@ import ComplaintForm from '../components/ComplaintForm';
 const SubmitComplaintPage = () => {
   return (
       <div >
-        <h6 className=" font-bold text-center">Submit a Complaint</h6>
+        <h1 className=" text-4xl font-bold text-center">Submit Complaint</h1>
         <ComplaintForm />
       </div>
   );
