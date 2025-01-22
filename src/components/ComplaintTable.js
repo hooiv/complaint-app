@@ -10,8 +10,8 @@ const ComplaintTable = () => {
 
   useEffect(() => {
     const fetchComplaints = async () => {
-      setLoading(true); // Start loading
-      setError(null); // Clear any previous errors
+      setLoading(true);
+      setError(null);
       try {
         const token = sessionStorage.getItem('token');
         const response = await fetch('/api/complaints', {
@@ -26,20 +26,20 @@ const ComplaintTable = () => {
         if (data.success) {
           setComplaints(data.data);
         } else {
-          setError(new Error(data.message || 'Failed to fetch complaints')); // Set error from backend message
+          setError(new Error(data.message || 'Failed to fetch complaints'));
         }
       } catch (e) {
-        setError(e); // Set error from fetch or JSON parsing
+        setError(e);
         console.error("Could not fetch complaints:", e);
       } finally {
-        setLoading(false); // End loading, regardless of success or failure
+        setLoading(false);
       }
     };
     fetchComplaints();
   }, []);
 
   const handleStatusChange = async (complaintId, newStatus) => {
-    setError(null); // Clear any previous errors
+    setError(null);
     try {
       const token = sessionStorage.getItem('token');
       const response = await fetch(`/api/complaints/${complaintId}`, {
@@ -55,13 +55,12 @@ const ComplaintTable = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Update the complaints state to reflect the change in status
       setComplaints(currentComplaints =>
         currentComplaints.map(complaint =>
           complaint._id === complaintId ? { ...complaint, status: newStatus } : complaint
         )
       );
-      console.log(`Complaint ${complaintId} status updated to ${newStatus}`); // Success log
+      console.log(`Complaint ${complaintId} status updated to ${newStatus}`);
     } catch (e) {
       setError(e);
       console.error("Could not update complaint status:", e);
@@ -84,11 +83,8 @@ const ComplaintTable = () => {
         <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
           <option value="">All Statuses</option>
           <option value="Pending">Pending</option>
-          <option value="Open">Open</option>
-          <option value="Investigating">Investigating</option>
+          <option value="In Progress">In Progress</option>
           <option value="Resolved">Resolved</option>
-          <option value="Closed">Closed</option>
-          <option value="Rejected">Rejected</option>
         </select>
         <select value={filterPriority} onChange={(e) => setFilterPriority(e.target.value)} className="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
           <option value="">All Priorities</option>
@@ -98,41 +94,38 @@ const ComplaintTable = () => {
         </select>
       </div>
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200"> {/* Added divide-y classes for table styling */}
-          <thead className="bg-gray-50 text-black"> {/* Added bg-gray-50 and text-black for header */}
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50 text-black">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th> {/* Tailwind classes for th */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th> {/* Tailwind classes for th */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th> {/* Tailwind classes for th */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Submitted</th> {/* Tailwind classes for th */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th> {/* Tailwind classes for th */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> {/* Tailwind classes for th */}
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Submitted</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200"> {/* Added bg-white and divide-y for tbody */}
+          <tbody className="bg-white divide-y divide-gray-200">
             {filteredComplaints.map((complaint) => (
               <tr key={complaint._id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.title}</td> {/* Tailwind classes for td */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.category}</td> {/* Tailwind classes for td */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.priority}</td> {/* Tailwind classes for td */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(complaint.dateSubmitted).toLocaleDateString()}</td> {/* Tailwind classes for td */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm"> {/* Tailwind classes for td and status span */}
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.title}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.category}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.priority}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(complaint.dateSubmitted).toLocaleDateString()}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-${complaint.status === 'Resolved' ? 'green' : complaint.status === 'Rejected' ? 'red' : 'yellow'}-100 text-${complaint.status === 'Resolved' ? 'green' : complaint.status === 'Rejected' ? 'red' : 'yellow'}-800`}>
                     {complaint.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {/* Tailwind classes for td and select */}
+                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <select
                     className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     value={complaint.status}
                     onChange={(e) => handleStatusChange(complaint._id, e.target.value)}
                   >
                     <option value="Pending">Pending</option>
-                    <option value="Open">Open</option>
-                    <option value="Investigating">Investigating</option>
+                    <option value="In Progress">In Progress</option>
                     <option value="Resolved">Resolved</option>
-                    <option value="Closed">Closed</option>
-                     <option value="Rejected">Rejected</option>
                   </select>
                 </td>
               </tr>
