@@ -64,8 +64,8 @@ Create a .env.local file in the root of your project and add the following envir
      MONGODB_URI=your_mongodb_connection_string  # Your MongoDB connection string (e.g., from MongoDB Atlas)
      SMTP_HOST=your_smtp_host                 # SMTP server host (e.g., smtp.example.com)
      SMTP_PORT=your_smtp_port                 # SMTP server port (e.g., 465 or 587)
-     SMTP_USER=your_smtp_user                 # SMTP username (email address)
-     SMTP_PASS=your_smtp_password               # SMTP password (app password if using Gmail)
+     SMTP_USER=your_smtp_user                 # SMTP username 
+     SMTP_PASS=your_smtp_password               # SMTP password 
      ADMIN_EMAIL=your_admin_email               # Email address to receive admin notifications
      JWT_SECRET=your_secure_jwt_secret_key      # A strong, random secret key for JWT signing (at least 32 characters)
      SECRET_COOKIE_PASSWORD=your_secure_cookie_password # A strong, random secret key for iron-session cookie encryption (at least 32 characters)
