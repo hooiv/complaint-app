@@ -8,7 +8,7 @@ const LoginPage = () => (
          <h1 className="text-2xl font-bold mb-6 text-center text-black">Login</h1>
          <LoginForm />
          <div className="mt-4 text-center">
-           <p>Don't have an account? <Link href="/register" className="text-blue-500 hover:text-blue-700">Register</Link></p>
+           <p className="text-black">Don't have an account? <Link href="/register" className="text-blue-500 hover:text-blue-700">Register</Link></p>
        </div>
       </div>
   </div>
