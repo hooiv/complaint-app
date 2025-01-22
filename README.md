@@ -193,6 +193,63 @@ Rate Limiting: Consider implementing rate limiting on your login and registratio
 Scalability: For production deployments with high traffic, consider using a more robust SMTP service for email sending and optimizing your MongoDB setup.
 
 Error Handling: The application includes basic error handling, but for production, you should implement more comprehensive error logging, monitoring, and user-friendly error messages.
+## Contributing
+
+We welcome contributions to the Complaint Application! If you'd like to contribute, please follow these guidelines:
+
+### Reporting Issues and Bugs
+
+If you find a bug or issue, please:
+
+1.  **Check Existing Issues:** Before submitting a new issue, please check the [Issue Tracker](link-to-your-issue-tracker-here - e.g., GitHub Issues) to see if a similar issue already exists.
+2.  **Create a New Issue:** If it's a new issue, create a new issue in the [Issue Tracker](link-to-your-issue-tracker-here - e.g., GitHub Issues), providing:
+    - A clear and descriptive title.
+    - Steps to reproduce the issue.
+    - Expected behavior vs. actual behavior.
+    - Relevant error messages, logs, or screenshots.
+    - Your environment details (Node.js version, npm/yarn version, browser, OS).
+
+### Feature Requests
+
+If you have a feature request or suggestion, please:
+
+1.  **Check Existing Feature Requests:** Review the [Issue Tracker](link-to-your-issue-tracker-here - e.g., GitHub Issues) for existing feature requests to avoid duplicates.
+2.  **Create a Feature Request Issue:** Open a new issue in the [Issue Tracker](link-to-your-issue-tracker-here - e.g., GitHub Issues) with:
+    - A clear and descriptive title for the feature.
+    - A detailed description of the feature and its benefits.
+    - Use cases or examples of how the feature would be used.
+
+### Contributing Code (Pull Requests)
+
+If you want to contribute code (bug fixes, new features, improvements), please follow these steps:
+
+1.  **Fork the Repository:** Fork the repository to your own GitHub account.
+2.  **Create a Branch:** Create a new branch from the `main` branch for your contribution:
+    ```bash
+    git checkout -b feature/your-feature-name
+    # or
+    git checkout -b bugfix/fix-issue-description
+    ```
+3.  **Make Changes:** Make your code changes in your forked repository, adhering to the project's coding style and conventions.
+4.  **Test Your Changes:** Thoroughly test your changes to ensure they work as expected and do not introduce regressions.
+5.  **Commit Your Changes:** Commit your changes with clear and concise commit messages:
+    ```bash
+    git commit -m "feat: Add feature description"
+    # or
+    git commit -m "fix: Fix bug description (#issue-number)"
+    ```
+6.  **Push to Your Fork:** Push your branch to your forked repository:
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+7.  **Submit a Pull Request (PR):** Create a new pull request from your branch to the `main` branch of the main repository.
+    - Provide a clear title and description for your PR.
+    - Link any relevant issues or feature requests to your PR.
+## License
+
+This project is licensed under the **MIT License**.
+
+
 
 
 
