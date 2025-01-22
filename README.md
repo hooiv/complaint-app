@@ -1,6 +1,7 @@
 # Complaint Application with JWT Authentication (Next.js)
 
 This is a Next.js application for managing complaints, featuring JWT (JSON Web Token) authentication for secure access.  Administrators can manage complaints, while regular users can submit complaints.
+# DEMO ADMIN CREDENTIALS: EMAIL: 2@j.c,PASSWORD:1
 
 ## Table of Contents
 
