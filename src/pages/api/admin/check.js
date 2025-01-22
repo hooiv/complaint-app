@@ -1,3 +1,4 @@
+// pages/api/admin/check.js
 import authMiddleware from '../../../lib/authMiddleware';
 
 const checkAdmin = async (req, res) => {
