@@ -1,4 +1,4 @@
-// pages/api/admin/check.js (Reintroduce Middleware - Modified Export)
+// pages/api/admin/check.js (using middleware - modified export)
 import authMiddleware from '../../../lib/authMiddleware';
 
 const checkAdmin = async (req, res) => {
@@ -8,6 +8,5 @@ const checkAdmin = async (req, res) => {
   return res.status(403).json({ isAdmin: false });
 };
 
-const handler = authMiddleware(checkAdmin); // Call authMiddleware and store the result
-
-export default handler; // Export the *result* (handler) as default
+const handler = authMiddleware(checkAdmin);
+export default handler;
