@@ -1,4 +1,4 @@
-// lib/authMiddleware.js (Modified - try...catch for error handling)
+// lib/authMiddleware.js (Modified - Detailed JWT/User Lookup Logs)
 import jwt from 'jsonwebtoken';
 import dbConnect from './dbConnect';
 import User from '../models/User';
@@ -11,32 +11,34 @@ const authMiddleware = async (req, res, next) => {
     return res.status(500).json({ message: 'Server error: Request headers missing.' });
   }
 
-  try { // ADD try...catch BLOCK
-
+  try {
     const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
-
     const token = authHeader.split(' ')[1];
+    console.log("authMiddleware: Extracted token:", token); // Log extracted token
 
-    try { // Inner try...catch for JWT verification
+    try {
+      console.log("authMiddleware: Verifying JWT..."); // Log JWT verification start
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log("authMiddleware: JWT Decoded SUCCESSFULLY:", decoded); // Log decoded payload
       await dbConnect();
+      console.log("authMiddleware: Database connected for user lookup"); // Log DB connect for lookup
       req.user = await User.findById(decoded._id);
+      console.log("authMiddleware: User.findById RESULT:", req.user); // Log User.findById result
       if (!req.user) {
+        console.log("authMiddleware: User NOT FOUND in DB for decoded _id:", decoded._id); // Log user not found in DB
         return res.status(401).json({ message: 'Invalid token - User not found' });
       }
+      console.log("authMiddleware: User FOUND and attached to req.user"); // Log success
       next(); // Success - call next middleware/handler
+
     } catch (jwtError) { // Catch JWT verification errors
-      console.error("authMiddleware: JWT Verification ERROR:", jwtError);
+      console.error("authMiddleware: JWT Verification ERROR:", jwtError); // Log JWT verification error details
       return res.status(401).json({ message: 'Invalid token' });
     }
 
   } catch (middlewareError) { // Catch ANY errors in authMiddleware
-    console.error("authMiddleware: UNHANDLED ERROR in middleware:", middlewareError); // Log full error
-    return res.status(500).json({ message: 'Server error: Authentication failed.' }); // Generic 500 error to client
+    console.error("authMiddleware: UNHANDLED ERROR in middleware:", middlewareError);
+    return res.status(500).json({ message: 'Server error: Authentication failed.' });
   }
 };
 
