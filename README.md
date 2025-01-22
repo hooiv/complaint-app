@@ -81,7 +81,6 @@ JWT_SECRET and SECRET_COOKIE_PASSWORD: Generate strong, random strings of at lea
 ### Running Locally
 To run the application locally in development mode:
 
-    ```bash
     npm run dev
     # or
     yarn dev
@@ -91,7 +90,6 @@ This will start the Next.js development server. Open your browser and navigate t
 
 To build and start the application in production mode (after building):
 
-    ```bash
     npm run build
     npm run start
     # or
