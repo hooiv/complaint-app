@@ -1,21 +1,34 @@
+// lib/emailService.js
 import nodemailer from 'nodemailer';
 
+// Create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,
-  secure: false, // Use `true` for 465, `false` for other ports
+  secure: process.env.SMTP_PORT === 465, // true for 465, false for other ports
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 });
 
-export async function sendNewComplaintEmail(complaint) {
+// Function to send email when a new complaint is submitted
+export const sendNewComplaintEmail = async (complaint) => {
   const mailOptions = {
     from: process.env.SMTP_USER,
-    to: process.env.ADMIN_EMAIL,
-    subject: `New Complaint Submitted: ${complaint.title}`,
-    text: `A new complaint has been submitted:\n\nTitle: ${complaint.title}\nCategory: ${complaint.category}\nPriority: ${complaint.priority}\nDescription: ${complaint.description}`,
+    to: process.env.ADMIN_EMAIL, // Send to admin
+    subject: 'New Complaint Submitted',
+    text: `A new complaint has been submitted.
+      Title: ${complaint.title}
+      Description: ${complaint.description}
+      Status: ${complaint.status}
+    `,
+    html: `
+      <p>A new complaint has been submitted.</p>
+      <p><strong>Title:</strong> ${complaint.title}</p>
+      <p><strong>Description:</strong> ${complaint.description}</p>
+      <p><strong>Status:</strong> ${complaint.status}</p>
+    `,
   };
 
   try {
@@ -24,20 +37,31 @@ export async function sendNewComplaintEmail(complaint) {
   } catch (error) {
     console.error('Error sending new complaint email:', error);
   }
-}
+};
 
-export async function sendStatusUpdateEmail(complaint) {
+// Function to send email when a complaint status is updated
+export const sendStatusUpdateEmail = async (complaint) => {
   const mailOptions = {
     from: process.env.SMTP_USER,
-    to: process.env.ADMIN_EMAIL, // Or potentially the user who submitted it if you implement user tracking
-    subject: `Complaint Status Updated: ${complaint.title}`,
-    text: `The status of the complaint "${complaint.title}" has been updated to: ${complaint.status}`,
+    to: process.env.ADMIN_EMAIL, // Send to admin
+    subject: 'Complaint Status Updated',
+    text: `The status of a complaint has been updated.
+        Title: ${complaint.title}
+        New Status: ${complaint.status}
+        Updated Date: ${new Date(complaint.updatedAt).toLocaleString()}
+    `,
+    html: `
+        <p>The status of a complaint has been updated.</p>
+        <p><strong>Title:</strong> ${complaint.title}</p>
+        <p><strong>New Status:</strong> ${complaint.status}</p>
+        <p><strong>Updated Date:</strong> ${new Date(complaint.updatedAt).toLocaleString()}</p>
+     `,
   };
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log('Status update email sent');
+    console.log('Complaint status update email sent');
   } catch (error) {
-    console.error('Error sending status update email:', error);
+    console.error('Error sending complaint status update email:', error);
   }
-}
+};
