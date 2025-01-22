@@ -1,12 +1,15 @@
-import ComplaintForm from '@/components/ComplaintForm';
+// pages/index.js
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-const HomePage = () => {
-  return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Submit a Complaint</h1>
-      <ComplaintForm />
-    </div>
-  );
+const IndexPage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/login');
+  }, []);
+
+  return null;
 };
 
-export default HomePage;
+export default IndexPage;
