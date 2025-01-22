@@ -106,30 +106,42 @@ const ComplaintTable = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredComplaints.map((complaint) => (
-              <tr key={complaint._id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.title}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.category}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.priority}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(complaint.dateSubmitted).toLocaleDateString()}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full  text-${complaint.status === 'Resolved' ? 'green' : complaint.status === 'Rejected' ? 'red' : 'yellow'}-100`}>
-                    {complaint.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <select
-                    className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    value={complaint.status}
-                    onChange={(e) => handleStatusChange(complaint._id, e.target.value)}
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Resolved">Resolved</option>
-                  </select>
-                </td>
-              </tr>
-            ))}
+            {filteredComplaints.map((complaint) => {
+              let badgeColorClass = ''; // Initialize variable to store color classes
+
+              if (complaint.status === 'Resolved') {
+                badgeColorClass = 'bg-green-100 text-green-800';
+              } else if (complaint.status === 'Rejected') {
+                badgeColorClass = 'bg-red-100 text-red-800';
+              } else {
+                badgeColorClass = 'bg-yellow-100 text-yellow-800';
+              }
+
+              return (
+                <tr key={complaint._id}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.title}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.category}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.priority}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(complaint.dateSubmitted).toLocaleDateString()}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${badgeColorClass}`}> {/* Use badgeColorClass here */}
+                      {complaint.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <select
+                      className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      value={complaint.status}
+                      onChange={(e) => handleStatusChange(complaint._id, e.target.value)}
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Resolved">Resolved</option>
+                    </select>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
