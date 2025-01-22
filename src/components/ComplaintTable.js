@@ -130,7 +130,7 @@ const ComplaintTable = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <select
-                      className="shadow appearance-none border rounded py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      className="shadow appearance-none border rounded py-2 px-3 text-gray-700  focus:outline-none focus:shadow-outline"
                       value={complaint.status}
                       onChange={(e) => handleStatusChange(complaint._id, e.target.value)}
                     >
