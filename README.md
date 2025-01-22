@@ -39,9 +39,10 @@ This is a Next.js application for managing complaints, featuring JWT (JSON Web T
    git clone <your-repository-url>
    cd complaint-app
 2. **Install dependencies:**
-   npm install
-   # or
-   yarn install
+    ```bash
+    npm install
+    # or
+    yarn install
 This command installs all necessary packages listed in package.json, including:
 
 bcryptjs: For password hashing.
@@ -58,15 +59,16 @@ next, react, react-dom, react-hook-form, tailwindcss, postcss, autoprefixer: Cor
 
 ### Environment Variables
 Create a .env.local file in the root of your project and add the following environment variables. Ensure you replace the placeholder values with your actual configuration.
+     ```bash
 
-MONGODB_URI=your_mongodb_connection_string  # Your MongoDB connection string (e.g., from MongoDB Atlas)
-SMTP_HOST=your_smtp_host                 # SMTP server host (e.g., smtp.example.com)
-SMTP_PORT=your_smtp_port                 # SMTP server port (e.g., 465 or 587)
-SMTP_USER=your_smtp_user                 # SMTP username (email address)
-SMTP_PASS=your_smtp_password               # SMTP password (app password if using Gmail)
-ADMIN_EMAIL=your_admin_email               # Email address to receive admin notifications
-JWT_SECRET=your_secure_jwt_secret_key      # A strong, random secret key for JWT signing (at least 32 characters)
-SECRET_COOKIE_PASSWORD=your_secure_cookie_password # A strong, random secret key for iron-session cookie encryption (at least 32 characters)
+     MONGODB_URI=your_mongodb_connection_string  # Your MongoDB connection string (e.g., from MongoDB Atlas)
+     SMTP_HOST=your_smtp_host                 # SMTP server host (e.g., smtp.example.com)
+     SMTP_PORT=your_smtp_port                 # SMTP server port (e.g., 465 or 587)
+     SMTP_USER=your_smtp_user                 # SMTP username (email address)
+     SMTP_PASS=your_smtp_password               # SMTP password (app password if using Gmail)
+     ADMIN_EMAIL=your_admin_email               # Email address to receive admin notifications
+     JWT_SECRET=your_secure_jwt_secret_key      # A strong, random secret key for JWT signing (at least 32 characters)
+     SECRET_COOKIE_PASSWORD=your_secure_cookie_password # A strong, random secret key for iron-session cookie encryption (at least 32 characters)
 
 Important:
 
@@ -78,18 +80,23 @@ JWT_SECRET and SECRET_COOKIE_PASSWORD: Generate strong, random strings of at lea
 
 ### Running Locally
 To run the application locally in development mode:
- npm run dev
- # or
- yarn dev
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+
+
 This will start the Next.js development server. Open your browser and navigate to http://localhost:3000 to access the application.
 
 To build and start the application in production mode (after building):
 
- npm run build
- npm run start
- # or
- yarn build
- yarn start
+    ```bash
+    npm run build
+    npm run start
+    # or
+    yarn build
+    yarn start
 ## Using the Application
 ### Registration
 Navigate to the registration page: http://localhost:3000/register.
